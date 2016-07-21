@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9467D81D1D40AD46006FEA86 /* mycell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9467D81C1D40AD46006FEA86 /* mycell.m */; };
 		9486CA9A1D3F864900C8AB87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9486CA991D3F864900C8AB87 /* main.m */; };
 		9486CA9D1D3F864900C8AB87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9486CA9C1D3F864900C8AB87 /* AppDelegate.m */; };
 		9486CAA01D3F864900C8AB87 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9486CA9F1D3F864900C8AB87 /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9467D81B1D40AD46006FEA86 /* mycell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mycell.h; path = html/mycell.h; sourceTree = "<group>"; };
+		9467D81C1D40AD46006FEA86 /* mycell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = mycell.m; path = html/mycell.m; sourceTree = "<group>"; };
 		9486CA951D3F864800C8AB87 /* 仿今日头条详情页下拉.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "仿今日头条详情页下拉.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9486CA991D3F864900C8AB87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9486CA9B1D3F864900C8AB87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 		9486CA971D3F864900C8AB87 /* 仿今日头条详情页下拉 */ = {
 			isa = PBXGroup;
 			children = (
+				9467D81B1D40AD46006FEA86 /* mycell.h */,
+				9467D81C1D40AD46006FEA86 /* mycell.m */,
 				9486CACB1D3F883700C8AB87 /* html */,
 				9486CA9B1D3F864900C8AB87 /* AppDelegate.h */,
 				9486CA9C1D3F864900C8AB87 /* AppDelegate.m */,
@@ -283,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9486CAA01D3F864900C8AB87 /* ViewController.m in Sources */,
+				9467D81D1D40AD46006FEA86 /* mycell.m in Sources */,
 				9486CA9D1D3F864900C8AB87 /* AppDelegate.m in Sources */,
 				9486CA9A1D3F864900C8AB87 /* main.m in Sources */,
 			);
@@ -508,6 +514,7 @@
 				9486CAC41D3F864A00C8AB87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9486CAC51D3F864A00C8AB87 /* Build configuration list for PBXNativeTarget "仿今日头条详情页下拉Tests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +523,7 @@
 				9486CAC71D3F864A00C8AB87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9486CAC81D3F864A00C8AB87 /* Build configuration list for PBXNativeTarget "仿今日头条详情页下拉UITests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +532,7 @@
 				9486CACA1D3F864A00C8AB87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

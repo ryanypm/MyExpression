@@ -11,9 +11,11 @@
 #define viewHeight viewSize.height
 
 #import "ViewController.h"
+#import "mycell.h"
 
-@interface ViewController ()<UIWebViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
-
+@interface ViewController ()<UIWebViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>{
+    int state;
+}
 
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -31,11 +33,12 @@
     [super viewDidLoad];
     
     UIWebView *webView = [[UIWebView alloc] init];
-    webView.frame = self.view.bounds;
+    webView.frame = CGRectMake(0, 0, viewWidth, self.view.bounds.size.height);
     webView.delegate = self;
     webView.scrollView.delegate = self;
     self.webView = webView;
     [self loadHtml];
+    [self.view addSubview:webView];
     
     UITableView *tableView = [[UITableView alloc] init];
     tableView.delegate = self;
@@ -55,9 +58,11 @@
     self.indicatorView = indicatorView;
     [indicatorView startAnimating];
     
+    state = 1;
+    
 }
 
-#pragma mark 记载html
+#pragma mark 加载html
 - (void)loadHtml{
     
     NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"details" ofType:@"html"];
@@ -68,7 +73,14 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
     [self.indicatorView stopAnimating];
+    //CGFloat scrollHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
+}
+
+#pragma mark click
+- (void)click:(UIButton *)button{
+    NSLog(@"button");
 }
 
 #pragma mark tableView 行高
@@ -79,9 +91,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    mycell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [[mycell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%d",arc4random() % 100];
@@ -92,32 +104,33 @@
 
 #pragma mark scrollview delegate (计算contentOffset的值，根据上下距离来决定bounces)
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
     CGFloat top = scrollView.contentOffset.y;
-    
-    NSLog(@"top = %f,height = %f class = %@",top,_webView.scrollView.contentSize.height - viewHeight - 100,[scrollView class]);
-    
     if ([scrollView isKindOfClass:[UITableView class]]) {
         if (top > (_tableView.contentSize.height - viewHeight - 100)) {
             _tableView.bounces = YES;
         }else{
             _tableView.bounces = NO;
         }
-    }else if(scrollView == _webView.scrollView){
-        if (top > 30) {
-            _tableView.bounces = NO;
-            _webView.scrollView.bounces = NO;
-            if (top >= _webView.scrollView.contentSize.height - viewHeight - 100) {
-                _tableView.bounces = YES;
-                _tableView.scrollEnabled = YES;
-            }
-        }else{
-            _tableView.bounces = NO;
-            _webView.scrollView.bounces = NO;
-            _tableView.scrollEnabled = NO;
-            if (top < 30) {
-                _webView.scrollView.bounces = YES;
-            }
+        if (top <= 1) {
+            state = 1;
         }
+        
+        _tableView.scrollEnabled = (state == 2);
+        _webView.scrollView.scrollEnabled = (state == 1);
+        
+    }else if(scrollView == _webView.scrollView){
+        
+        if (top >= _webView.scrollView.contentSize.height - viewHeight - 1) {
+            state = 2;
+        }
+        if (top > 30) {
+            _webView.scrollView.bounces = NO;
+        }else{
+            _webView.scrollView.bounces = YES;
+        }
+        _webView.scrollView.scrollEnabled = (state == 1);
+        _tableView.scrollEnabled = (state == 2);
     }
 }
 
